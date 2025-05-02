@@ -1,28 +1,29 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('login-form');
-  
-    form.addEventListener('submit', (e) => {
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
-  
-      if (!email || !password) {
-        e.preventDefault();
-        alert('Por favor, preencha todos os campos.');
-      } else {
-        // Aqui você pode prosseguir com a submissão do formulário.
-        console.log('Formulário enviado');
-      }
-    });
-  
-    // Exemplo de ação para o botão de Recuperar Senha
-    document.querySelector('.btn.recover').addEventListener('click', () => {
-      alert('Redirecionando para a recuperação de senha...');
-      // Redirecione para a página de recuperação ou execute a ação desejada.
-    });
-  
-    // Exemplo de ação para o botão de Registrar
-    document.querySelector('.btn.register').addEventListener('click', () => {
-      alert('Redirecionando para a página de registro...');
-      // Redirecione para a página de registro ou execute a ação desejada.
-    });
+// Aguarda o carregamento completo do DOM
+document.addEventListener("DOMContentLoaded", function () {
+  // Seleciona o botão de login
+  const loginButton = document.querySelector(".btn.login");
+
+  // Adiciona um evento de clique para validar o e-mail
+  loginButton.addEventListener("click", function () {
+    const emailInput = document.getElementById("email");
+    const email = emailInput.value.trim();
+
+    // Valida o formato do e-mail
+    if (!validateEmail(email)) {
+      alert("Por favor, insira um e-mail válido");
+      emailInput.focus();
+      return;
+    }
+
+    // Caso o e-mail seja válido, prossiga com a lógica de autenticação
+    console.log("E-mail válido:", email);
+    // Aqui você pode chamar uma função para enviar os dados ou realizar outras ações
   });
+});
+
+// Função que utiliza uma expressão regular para testar se o e-mail está em formato válido
+function validateEmail(email) {
+  // Expressão regular básica: verifica se há caracteres antes e depois do "@" e se há um ponto com pelo menos um caractere após
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
